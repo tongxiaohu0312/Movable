@@ -1,14 +1,15 @@
 /* eslint-disable react/jsx-indent-props */
-import { MovableArea, MovableView, View, Map } from '@tarojs/components'
+import { MovableArea, MovableView, View, Map, ScrollView } from '@tarojs/components'
 import { useEffect, useRef, useState } from 'react';
 
 import './index.less';
+import Movable from './Movable';
 
-const h2 = 700;
+const h2 = 600;
 
 const h1 = 400;
 
-const h0 = 100;
+const h0 = 0;
 
 const gap = 50;
 
@@ -88,7 +89,7 @@ function FadeInOut({ children, duration = 500, hidden = false }) {
 }
 
 export default function MovablePage() {
-	const [y, setY] = useState(h2);
+	const [y, setY] = useState(h0);
 	const [hidden, setHidden] = useState(false);
 	const yRef = useRef(h2);
 	const syRef = useRef(yRef.current);
@@ -96,9 +97,9 @@ export default function MovablePage() {
 	const [showHeader, setShowHeader] = useState(y === h0);
 
 	function onChange(e) {
+		console.log('y', e.detail.y);
 		if (yRef.current <= 150 && e.detail.y > 150) {
 			setHidden(true)
-			console.log('y', e.detail.y);
 		}
 		yRef.current = e.detail.y;
 	}
@@ -137,26 +138,13 @@ export default function MovablePage() {
 				longitude={121.363556}
 				show-location
 			/>
-			{
-				showHeader && (
-					<FadeInOut hidden={hidden}>
-						<View className='header'></View>
-					</FadeInOut>
-				)
-			}
-			<MovableArea className='movable-area'>
-				<MovableView
-					direction='all'
-					className='movable-view'
-					onChange={onChange}
-					y={y}
-					onTouchEnd={onTouchEnd}
-					onTouchStart={onTouchStart}
-					inertia
-				>
-					<View className='movable-view__content'>可拖动的视图</View>
-				</MovableView>
-			</MovableArea>
+			<Movable>
+				<View>
+					<View className='module module--1'>司机正在赶来</View>
+					<View className='module module--2'>寻找拼友中</View>
+					<View className='module module--3'>资源位</View>
+				</View>
+			</Movable>
 		</View>
 	)
 }

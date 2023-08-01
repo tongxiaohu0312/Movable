@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { Provider } from 'mobx-react'
 
-import counterStore from './store/counter'
+import counterStore from './modules/models/counter'
 
 import './app.less'
 

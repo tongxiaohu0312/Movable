@@ -1,7 +1,8 @@
 export default {
   pages: [
-    'pages/MovablePage/index',
     'pages/index/index',
+    'pages/MovablePage/index',
+    'pages/TodoPage/TodoPage',
   ],
   window: {
     backgroundTextStyle: 'light',
